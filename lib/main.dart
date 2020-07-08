@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'question_bank.dart';
-
+import 'package:rflutter_alert/rflutter_alert.dart'
+    '';
 QuestionBank questionBank = QuestionBank();
 
 void main() => runApp(Quizzler());
@@ -30,17 +31,29 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = [];
 
-  int questionNum = 0;
-
   void checkAnswer(bool answer) {
     setState(() {
-      if (answer == questionBank.getQuestionAnswer()) {
-        addCheckIcon();
-      } else {
-        addCloseIcon();
-      }
 
-      questionBank.next();
+      if (questionBank.isFinished()){
+        Alert(
+          context: context,
+          title: 'Finished!',
+          desc: 'You\'ve reached the end of the quiz.',
+        ).show();
+
+        questionBank.reset();
+        scoreKeeper = [];
+
+      }
+      else {
+        if (answer == questionBank.getQuestionAnswer()) {
+          addCheckIcon();
+        } else {
+          addCloseIcon();
+        }
+
+        questionBank.next();
+      }
     });
   }
 
