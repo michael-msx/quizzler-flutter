@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'question_bank.dart';
-import 'package:rflutter_alert/rflutter_alert.dart'
-    '';
+import 'package:rflutter_alert/rflutter_alert.dart';
+
 QuestionBank questionBank = QuestionBank();
 
 void main() => runApp(Quizzler());
@@ -33,8 +33,7 @@ class _QuizPageState extends State<QuizPage> {
 
   void checkAnswer(bool answer) {
     setState(() {
-
-      if (questionBank.isFinished()){
+      if (questionBank.isFinished()) {
         Alert(
           context: context,
           title: 'Finished!',
@@ -43,9 +42,7 @@ class _QuizPageState extends State<QuizPage> {
 
         questionBank.reset();
         scoreKeeper = [];
-
-      }
-      else {
+      } else {
         if (answer == questionBank.getQuestionAnswer()) {
           addCheckIcon();
         } else {
